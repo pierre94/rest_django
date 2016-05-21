@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'api/ruijie/', include('ruijie.urls')),
     # url(r'^accounts/', 'accounts.views.handle', name='accounts'),
     # url(r'^accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^dev/', include('dev.urls', namespace='dev')),
+    url(r'^', include('dev.urls', namespace='dev')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

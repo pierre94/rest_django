@@ -27,7 +27,9 @@ SECRET_KEY = '8e3n286czx!!9wrzrw%r2k2$wupvhd8vbr=2%nfllsvqdhdp@&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'ws.bear2.cn',
+                 ]
 
 
 # djcelery 配置
