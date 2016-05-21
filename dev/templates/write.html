@@ -1,0 +1,23 @@
+{% extends "index.html"%}
+{% load staticfiles %}
+
+{% block title %}MyBlog{% endblock %}
+
+{% block article%}
+		{% if user %}
+		<div class="create">
+		<form method="post" action='.' id="topicform">
+			<label for="id_topic">标题：</label>
+			<input class="form-control" type="text" name="title" id="title" size="60" required="required">
+			<label for="id_content">内容：</label>
+			<textarea id = "id_content" class="form-control" form="topicform" name="content" rows="10" required wrap="hard"></textarea>
+			<button type="submit" class="btn btn-primary btn-sm">发表</button>
+			<br/>
+			<br/>
+		</form>
+		</div>
+ 		{% else %} 
+ 		<h1>亲!你还没有登陆哦，<a href="/blog/login">猛击这里</a>登陆</h1>
+        <h1>还没有账号？快<a href="/blog/register">点击这里</a> 注册吧</h1>
+        {% endif %}
+ {% endblock %}

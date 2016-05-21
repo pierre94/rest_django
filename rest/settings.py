@@ -1,3 +1,4 @@
+# encoding: utf-8
 """
 Django settings for rest project.
 
@@ -11,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import djcelery
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,6 +30,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# djcelery 配置
+djcelery. setup_loader()
+
+BROKER_URL = 'django://'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,14 +46,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'quickstart',
-    'snippets.apps.SnippetsConfig',
-    'rest_framework'
+    # 'accounts',
+    # 'quickstart',
+    # 'snippets.apps.SnippetsConfig',
+    # 'bootstrap3',
+    'dev',
+    'ruijie',
+    'rest_framework',
+    'djcelery',
+    'kombu.transport.django',
 ]
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 1 # 分页设置
 }
 
 MIDDLEWARE_CLASSES = [
@@ -82,12 +97,25 @@ WSGI_APPLICATION = 'rest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rest',
+        'USER': 'root',
+        'PASSWORD': 'test',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
@@ -114,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -122,6 +150,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+TIME_ZONE = 'Asia/Shanghai'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/

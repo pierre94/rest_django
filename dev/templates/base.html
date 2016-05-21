@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<link rel="stylesheet" href="{% static "dev/css/index.css" %}">
+<link rel="stylesheet" href="{% static "dev/css/bootstrap.min.css" %}">
+<script type="text/javascript" src="{% static "dev/js/jquery.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "dev/js/bootstrap.min.js" %}"></script>
+	<title>{% block title %}{% endblock %} </title>
+</head>
+<body style="background-color: #7F807C">
+
+	<header>
+    <div class="header-content">
+         <div class="navbar navbar-default" role="navigation">
+          　<div class="navbar-header">
+          　    <a href="/dev/" class="navbar-brand">Web Service  开发者中心</a>
+          　</div>
+
+        <ul class="nav navbar-nav navbar-right">
+            {% if user %}
+            <li><a><span class="glyphicon glyphicon-user"></span>{{user.username}}</a></li>
+            <li style="margin-right:20px"><a href="/dev/logout">登出</a></li>
+            {% else %}
+            <li><a href="/dev/login">登录</a></li>
+            <li style="margin-right:20px"><a href="/dev/register">注册</a></li>
+            {% endif %}
+        </ul>
+        </div>
+    </div>
+	</header>
+  
+    <div class="content">
+        <div class="article">
+            {% block article %}{% endblock %}
+        </div>
+        <div class="aside">
+            {% block aside %}{% endblock  %}
+        </div>
+    </div>
+
+    <footer>
+        <hr>
+        <p align="center">Copyright 2016 西北工业大学信息安全系<br />Powered by Django</p>
+    </footer>
+    {% block js %}
+    {% endblock %} 
+    
+
+</body>
+</html>

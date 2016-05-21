@@ -1,3 +1,4 @@
+# encoding: utf-8
 """rest URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -16,15 +17,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from quickstart import views
 
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+
+# api 路由
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^', include(router.urls)),
-    url(r'^', include('snippets.urls')),
+    url(r'api/ruijie/', include('ruijie.urls')),
+    # url(r'^accounts/', 'accounts.views.handle', name='accounts'),
+    # url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^dev/', include('dev.urls', namespace='dev')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

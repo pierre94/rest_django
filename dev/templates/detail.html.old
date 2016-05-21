@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% block title%}话题详情{%endblock%}
+{% block article %}
+        <article>
+        <div class="panel panel-default">
+            <div class="HIT-panel">
+            <div class="panel-heading">
+            <table border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="40"><span class="glyphicon glyphicon-user"> {{topic.author.username}}</span></td>
+                        <td width="auto">{{topic.title}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="panel-body">
+            <pre>{{topic.content}}</pre>
+            </div>
+            <div class="panel-footer">
+            <span class="glyphicon glyphicon-calendar">{{topic.pub_date}}</span>  <span align="right">  评论（{{topic.comment_num}}）；赞（{{topic.like_num}}）；
+                踩（{{topic.dislike_num}}）</span>
+            </div>
+            </div>
+        </div>
+        <div class="comment_body">
+            <section>
+            {% if user %}
+                <form method="post" action='.' id="topicform">
+                <label for="id_content">评论内容：</label>
+                <textarea class="form-control" id="id_content" form="topicform" name="content" rows="4" required placeholder="说点什么吧..."></textarea>
+                <button type="submit" class="btn btn-primary btn-sm" style="float:right;">提交评论</button>
+                </form>
+                 
+            {% else %}
+                <p><a href="/topic/login">登陆</a>后可参与评论</p>
+            {% endif %}
+            <hr/>
+            {% if comment_list%}
+            {% for comment in comment_list%}
+            <div class="comment">
+            <table border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="40"><span class="glyphicon glyphicon-user"></span></td>
+                        <td width="auto">
+                            <span style="color:#9D9C9A; font-size:10px;">来自<a href="">{{comment.user.username}}</a></span>
+                            
+                            <span style="margin-left:10px;color:#9D9C9A; font-size:10px;">
+                            {{comment.pub_date}}
+                            </span>
+                            <p>{{comment.content}}</p>
+                            <hr/>
+                        </td>
+                        <td width="60">
+                            <span class="glyphicon glyphicon-heart">{{comment.like_num}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p align="center">暂无评论！</p>
+            {% endif %}
+            </section>
+        </div>
+        </article>
+{% endblock %}

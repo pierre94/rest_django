@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title%}开发者中心{% endblock %}
+{% block article %}
+<section>
+
+
+    <article>
+
+        <div class="panel panel-default HIT-panel">
+            <div class="HIT-panel">
+            <div class="panel-heading"><span class="glyphicon glyphicon-user"> 管理员</span></div>
+            <div class="panel-body">
+                <table border="0" width="100%">
+                    <tbody>
+                    <tr>
+                        <td width="auto">欢迎来到开发者中心，这是Pierre毕设的一部分，在这里注册账号可以得到Web Service的权限认证信息</td>
+                        <td width="60" align="right" valign="middle"><span class="badge">置顶</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <span class="glyphicon glyphicon-calendar">2016年5月18日</span>
+            </div>
+            </div>
+    </article>
+
+    <article>
+
+        <div class="panel panel-default HIT-panel">
+            <div class="HIT-panel">
+            <div class="panel-heading"><span class="glyphicon glyphicon-user"> 管理员</span></div>
+            <div class="panel-body">
+                <table border="0" width="100%">
+                    <tbody>
+                    <tr>
+
+                        <td width="auto"><b>REST风格Web Service使用说明:</b><p><p>
+                            xxx.com/api/ruijie/v1/user 返回所有用户的结果  xxx.com/api/ruijie/v1/user/学号 返回指定学号的结果。<p>
+                            有v1～v4四个版本：<p>
+                            v1是无认证无加密版本，v2是密令(app_id和app_secret)认证版本，v3是token认证版本，v4是token认证加密版本。<p>
+                            关于token:<p>
+                            token系统每日更新，若token无效，post密令至 xxx.com/dev/token 即可返回有效token。 <p>
+                            关于加解密:<p>
+                            解密采用AES的CBC模式，key和iv都是系统提供的16位的key。
+                        </td>
+                        <td width="60" align="right" valign="middle"><span class="badge">置顶</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <span class="glyphicon glyphicon-calendar">2016年5月18日</span>
+            </div>
+            </div>
+    </article>
+</section>
+
+
+{% endblock %}
+{% block aside %}
+<aside>
+    <br>
+    {% if user %}
+    <!--<h1>{{user.username}}</h1>-->
+    <ul>
+        {% if email %}
+        <li><p>邮箱：{{email}}</p></li>
+        {% else %}
+        <li><p>邮箱：（未知）</p></li>
+        {% endif %}
+
+
+        <li><p>权限： 普通开发者</p></li>
+
+        <li><a href="/dev/detail/">app_id和app_secret</a></li>
+    </ul>
+    {% else %}
+    <div class="sign-up-lead">
+        <a href="/dev/register">
+            <button class="btn btn-default">现在注册</button>
+        </a>
+<br>
+        <p></p>
+    </div>
+    {% endif %}
+    <br>
+</aside>
+
+
+{% endblock %}
+
